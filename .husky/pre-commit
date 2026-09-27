@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ -d "backend" ] && command -v ruff >/dev/null 2>&1; then
+  echo "🔍 Running backend checks..."
+  ruff check backend/ --fix
+  black backend/
+fi
+
+if [ -d "frontend" ]; then
+  echo "🔍 Running frontend checks..."
+  (cd frontend && npx lint-staged)
+fi
